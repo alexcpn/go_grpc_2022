@@ -1,0 +1,25 @@
+# Dockerfile for gRPC 1.28 & Go 1.19
+# Can be used as container to build Go projects with gRPC
+
+# based on and updatedfrom  https://github.com/grpc/grpc-docker-library/pull/69
+  # Build command docker build --build-arg  http_proxy=  -t grpc/go:1.19 -f Dockerfile.go_grpc.1.19 .
+FROM golang:1.19
+
+# install protobuf from source
+ENV PB_VER 21.5
+ENV PB_URL https://github.com/protocolbuffers/protobuf/releases/download/v${PB_VER}/protoc-${PB_VER}-linux-x86_64.zip
+RUN apt-get update && apt-get install -y unzip && mkdir -p /tmp/protoc && \
+  curl -L ${PB_URL} > /tmp/protoc/protoc.zip && \
+  cd /tmp/protoc && \
+  unzip protoc.zip && \
+  cp /tmp/protoc/bin/protoc /usr/local/bin &&  \
+  cp -R /tmp/protoc/include/* /usr/local/include && \
+  chmod go+rx /usr/local/bin/protoc && \
+  cd /tmp && \
+  rm -r /tmp/protoc
+
+# Get the source from GitHub
+ENV  GO111MODULE on
+RUN	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysample-deployment
+  labels:
+    app: mysample
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mysample
+  template:
+    metadata:
+      labels:
+        app: mysample
+    spec:
+      containers:
+      - name: mysample
+        image: <alexcpn>/test_server:1.2
+        ports:
+        - containerPort: 50051
