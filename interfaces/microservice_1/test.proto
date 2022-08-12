@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "microservice_1/";
+
+/* SearchRequest represents a search query, with pagination options to
+ * indicate which results to include in the response. 
+ * Hint use https://regex-golang.appspot.com/assets/html/index.html for
+ *  Regex validation in Go
+ */
+
+message SearchRequest {
+  string query = 1 ;
+  string email_id= 2;
+  int32 page_number = 3;  // Which page number do we want?
+  int32 result_per_page = 4;  // Number of results to return per page.
+}
+
+/** SearchResponse represents the response of the Search
+*/
+message SearchResponse{
+    string search_response = 1; // the search response
+    int32 page_number = 2; // the page number
+    int32 total_pages = 3; //total number of pages 
+
+}
+
+/** This is a test search service
+*/
+service SearchService {
+  // Method to Search a test service
+  rpc Search (SearchRequest) returns (SearchResponse) {}
+}
