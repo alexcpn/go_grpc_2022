@@ -11,22 +11,26 @@ See also https://medium.com/techlogs/micro-services-git-d840305e6220
 
 ## To build locally 
 
-In a (linux) machine wich has Go installed > 1.12 and  
+In a (linux) machine which has Go installed > 1.17 and  
 cd to microservice_x directory and run `make once` to install the protoc compiler related plugins for Go
 
 After that run `make all` for all builds and rebuilds
 
 ### To Test
 
-
 - cd to microservice_x directory
 - cd to integration_test  and run 'go test' 
 
 ### To run manually
 
-- cd to microservice_x directory
-- cd to test_server and run the generated ./test_server
-- cd to test_client and run the generated ./test_client
+- cd  microservice_x/generated directory
+- run server   ./run_server
+- run client  ./test_client
+
+To run server in docker
+
+- docker run --rm --name test -p 50051:50051 run_server:1.2
+
 
 ### To build locally without any dependencies
 
@@ -34,12 +38,13 @@ If you just have 'make' installed and don't have any other dependency even Go yo
 the same output in a Docker container
 First
  - cd to microservice_x 
- - run 'make make_in_docker_with_vol_map'
+ - run 'make docker_image'
 
-(note - some file permission changes after this)
+
+
 
 ## To build in Windows
-From Windows 10 onwards has docker support. You can install 'make' via Cholclatey
+From Windows 10 onwards has docker support. You can install 'make' via Choclatey
 (https://stackoverflow.com/a/54086635/429476) and run. 
 The shell scripts for CURRENTDIR and PARENTDIR needs to be adopted to Windows Path format
 

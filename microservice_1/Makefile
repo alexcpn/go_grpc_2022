@@ -59,20 +59,21 @@ _build_go:
 	&& go tool cover -html=../generated/cover.out -o ../generated/cover.html
 # lets run the linter  -ignore on fail
 	-golangci-lint run > ./generated/linter.out
-	cd test_server && go mod tidy &&  go build -o ../generated/test_server
+	cd run_server && go mod tidy &&  go build -o ../generated/run_server
 	cd test_client && go build -o  ../generated/test_client
 
 # Build a Docker conatiner for the MS 
-# Not that this builds the Go project inside the container -see the Dockerfile for details
-build_docker_image:
-	docker build -t test_server:1.2 -f  Dockerfile $(PARENTDIR) 
-
+# Not that this builds the Go project inside the container  itself. This could be a good pattern to build in CI
+docker_image:
+	docker build -t run_server:1.2 -f  Dockerfile $(PARENTDIR) 
+podman_image:
+	podman build -t run_server:1.2 -f  Dockerfile $(PARENTDIR) 
 
 #--------------------End-----------------------------
 
 
 # Ignore the target below if it seems complex.
-# It is basically same as above; but puts the build output to the host
+# It is basically same as above; but puts the build output to the host - Not recommended
 
 # Build inside docker with volume mapping to generate the documentation or test locally
 # !! Note !! that when you run in docker the files that is generated in volume map will have

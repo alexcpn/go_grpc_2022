@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: mysample
-        image: <alexcpn>/test_server:1.2
+        image: <alexcpn>/run_server:1.2
         ports:
         - containerPort: 50051

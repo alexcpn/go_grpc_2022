@@ -1,4 +1,4 @@
-module test_server
+module run_server
 
 go 1.19
 

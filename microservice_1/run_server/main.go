@@ -3,8 +3,7 @@ package main
 import (
 	"log"
 	 "net"
-	 "fmt"
-	"google.golang.org/grpc"
+	 "google.golang.org/grpc"
 	pb "interfaces/microservice_1"
 	server "server"
 )
@@ -17,13 +16,14 @@ const (
 )
 func main() {
 	//coding/testgo# go build cassandratest && ./cassandratest -ni 10 -nq 1000000 -del=false -pno=10
-	fmt.Println("Go protobuffer test")
+	log.Printf("Go GRPC Protobuffer test: Running on Port %v",port)
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterSearchServiceServer(s, &server.Server{})
+	log.Printf(" Listening for connections on Port %v",port)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
