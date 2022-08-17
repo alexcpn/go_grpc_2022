@@ -25,7 +25,7 @@ After that run `make all` for all builds and rebuilds
 
 - cd  microservice_x/generated directory
 - run server   ./run_server
-- run client  ./test_client
+- run client  ./go_client
 
 To run server in docker
 

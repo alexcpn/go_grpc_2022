@@ -7,6 +7,8 @@ PARENTDIR = $(shell dirname $(CURRENTDIR))
 
 # Set the variables
 PB_REL := https://github.com/protocolbuffers/protobuf/releases
+GRPCWEBREL := https://github.com/grpc/grpc-web/releases/download
+GPRCWEB := 1.3.1
 GOPATH = $(HOME)/go
 PATH := $(PATH):$(GOPATH)/bin:$(HOME)/.local/bin
 #HTTP_PROXY = <> in case you are building within enterpirse network
@@ -28,6 +30,16 @@ install_protoc:
 # A dash before the line below tells MAKE to ignore the error if the command fails.
 	-$(shell unzip protoc-3.15.8-linux-x86_64.zip -d $(HOME)/.local)
 	-$(shell protoc --version)
+
+install_grpcweb:
+	$(info  Downloading from $(GRPCWEBREL)/$(GPRCWEB)/protoc-gen-grpc-web-$(GPRCWEB)-linux-x86_64)$(shell curl -LO $(GRPCWEBREL)/$(GPRCWEB)/protoc-gen-grpc-web-$(GPRCWEB)-linux-x86_64)
+	$(shell chmod +x protoc-gen-grpc-web-$(GPRCWEB)-linux-x86_64)
+	$(shell mv protoc-gen-grpc-web-$(GPRCWEB)-linux-x86_64 $(HOME)/.local/bin/protoc-gen-grpc-web)
+
+compile_grpcweb:
+	protoc  -I ../interfaces/ ../interfaces/microservice_1/*.proto \
+	--js_out=import_style=commonjs,binary:./generated \
+	--grpc-web_out=import_style=typescript,mode=grpcweb:./generated
 
 # Get and install the Golang GRPC plugins - Do this only once
 _get_deps1:
@@ -60,7 +72,7 @@ _build_go:
 # lets run the linter  -ignore on fail
 	-golangci-lint run > ./generated/linter.out
 	cd run_server && go mod tidy &&  go build -o ../generated/run_server
-	cd test_client && go build -o  ../generated/test_client
+	cd go_client && go build -o  ../generated/go_client
 
 # Build a Docker conatiner for the MS 
 # Not that this builds the Go project inside the container  itself. This could be a good pattern to build in CI

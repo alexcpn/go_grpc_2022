@@ -2,5 +2,5 @@ microservice_1/generated/**
 .vscode/**
 microservice_1/protoc-3.15.8-linux-x86_64.zip
 **/go.sum
-microservice_1/test_client/test_client
+microservice_1/go_client/go_client
 microservice_1/run_server/run_server
