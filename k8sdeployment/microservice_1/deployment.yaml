@@ -1,0 +1,60 @@
+# Create NS
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc
+# Create Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-deployment
+  namespace: grpc
+  labels:
+    app: mygrpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mygrpc
+  template:
+    metadata:
+      labels:
+        app: mygrpc
+    spec:
+      containers:
+      - name: grpc-server
+        image: alexcpn/run_server:1.2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 50051
+          protocol: TCP
+        resources: {}
+        securityContext: {}
+      - name: envoy-sidecar
+        image: alexcpn/envoy_run_server:1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        securityContext: {}
+
+---
+# Service Configuration
+# --------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+  namespace: grpc
+  labels:
+    run: simple-webapp
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: mygrpc
+  type: NodePort

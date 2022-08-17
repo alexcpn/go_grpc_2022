@@ -20,17 +20,17 @@ Run `make enovy_docker`
 
 After the image is build run the envoy proxy
 
-`docker run --name=envoy --rm   --net=host  envoy:1`
+`docker run --name=envoy --rm   --net=host  envoy_run_server:1`
 
 ## To Run the client
 
-You can open the dist\index.html in a browser; But broswers do not allow loading local Javscript files. You can use this chrome plugin https://chrome.google.com/webstore/detail/web-server-for-chrome/
+You can open the dist\index.html in a browser; But browsers do not allow loading local Javascript files. You can use this chrome plugin https://chrome.google.com/webstore/detail/web-server-for-chrome/
 
 and give the path to ./dist folder to load the index.html
 
 You can see output in Chrome Console for the Console.log outputs
 
-![Ouput](https://i.imgur.com/mwRehT0.png)
+![Ouput](https://i.imgur.com/WqcFiCS.png)
 
 
 
