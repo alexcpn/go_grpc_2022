@@ -40,8 +40,13 @@ First
  - cd to microservice_x 
  - run 'make docker_image'
 
+## To Deploy in a Kubernetes Cluster
 
+Please see the [README.md](k8sdeployment/microservice_1/README.md) in k8sdeployment/microservice_1/README.md folder
 
+### To Check how you can write a TypeScript GRPC client and use it directly from a Web Page
+
+See the [README.md](microservice_1/ts_client/README.md) in microservice_1/ts_client/README.md
 
 ## To build in Windows
 From Windows 10 onwards has docker support. You can install 'make' via Choclatey
@@ -49,5 +54,5 @@ From Windows 10 onwards has docker support. You can install 'make' via Choclatey
 The shell scripts for CURRENTDIR and PARENTDIR needs to be adopted to Windows Path format
 
 -------------------------
-(The github ci events is enabled for this- you can fork - do some dummy changes and create a pull request to see the make in action https://github.com/alexcpn/golang_grpc_example/pull/5/checks?check_run_id=372118434)
+
 

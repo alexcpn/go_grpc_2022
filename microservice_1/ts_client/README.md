@@ -2,7 +2,8 @@
 
 The application is structured to work with webpack without config files
 
-## Prerequisite:
+## Pre-requisite:
+
 - sudo apt install npm
 - Compile and run the GRPC server (run_server folder)- see the Parent README
 
@@ -10,11 +11,11 @@ The application is structured to work with webpack without config files
 
 Run `make once` to install dependencies like grpc-web and webpack related libraries
 
-Run `make all` to compile .TS and Protobuffer related files  and package the resultant JS
+Run `make all` to compile .TS and Proto-buffer related files  and package the resultant JS
 
 For accessing GRPC through a browser we need an Envoy Proxy running. For that
 
-## To build Envoy Docker image with configration for our GRPC Server
+## To build Envoy Docker image with configuration for our GRPC Server
 
 Run `make enovy_docker`
 
@@ -24,9 +25,14 @@ After the image is build run the envoy proxy
 
 ## To Run the client
 
-You can open the dist\index.html in a browser; But browsers do not allow loading local Javascript files. You can use this chrome plugin https://chrome.google.com/webstore/detail/web-server-for-chrome/
+Pre-requisite is that the Server is running  as  a Pod in a Kubernetes (Kind Cluster) with Envoy Side car. How this is done please see [README.md](../../README.md) in ../../README.md
 
-and give the path to ./dist folder to load the index.html
+
+You can open the [dist/index.html](dist/index.html) in a browser. 
+
+**NOTE** Browsers do not allow loading local Javascript files. So you need to serve with a webserver.
+
+You can use this chrome plugin https://chrome.google.com/webstore/detail/web-server-for-chrome/ and give the path to ./dist folder to load the index.html
 
 You can see output in Chrome Console for the Console.log outputs
 
