@@ -1,12 +1,30 @@
 # Deploy the Server in a Kubernetes cluster
 
+
+## Build the server docker image
+
+Make file [../microservice_1/Makefile](../microservice_1/Makefile)
+
+```
+make docker_image
+```
+
+## Build the Envoy docker image
+
+Envoy sidecar configuration - [k8sdeployment/microservice_1/envoy/envoy.yaml](./microservice_1/envoy/envoy.yaml)
+
+Makefile [k8sdeployment/Makefile](Makefile)
+
+```
+make enovy_docker
+```
+
 Note that I tagged the Docker images and pushed to my free Docker hub repo to use in this
 
 Prerequisite:
   A Kubernetes cluster. If none use `kind` and create a local cluster
 
-
-Deploy the file
+Deploy the deployment file  [k8sdeployment/microservice_1/deployment.yaml](./microservice_1/deployment.yaml)
 
 `kubectl create -f deployment.yaml`
 
@@ -26,6 +44,7 @@ kubectl get svc -n grpc
 NAME           TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 grpc-service   NodePort   10.96.183.115   <none>        8080:30036/TCP   66s
 ```
+## Port forward to expose the service outside the cluster
 
 We will use port forwarding and expose the service ingress 8080 to local host
 
@@ -34,6 +53,8 @@ kubectl -n grpc  port-forward svc/grpc-service 8080:8080
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
+
+## Run the Client through a simple Web server
 
 Let's run the Chrome WebServer and Run the Typescript Client.
 

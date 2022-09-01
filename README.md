@@ -17,12 +17,10 @@ Please read also  https://medium.com/techlogs/micro-services-git-d840305e6220 an
 - Go-based Server implementation: https://github.com/alexcpn/go_grpc_2022/tree/main/microservice_1/server
 - Go-based Client: https://github.com/alexcpn/go_grpc_2022/tree/main/microservice_1/go_client
 - Go Server build: https://github.com/alexcpn/go_grpc_2022/blob/main/microservice_1/Makefile
-- Envoy Side Car Configuration&& Envoy docker image build: https://github.com/alexcpn/go_grpc_2022/blob/main/microservice_1/ts_client/envoy/envoy.yaml
-- Kubernetes Deployment: https://github.com/alexcpn/go_grpc_2022/tree/main/k8sdeployment/microservice_1 
 
-- - Docker Images are from the ones generated for Go GRPC Server and Envoy sidecar generated above; I am using a Kind based cluster- any cluster will do
-- Kube Proxy to expose the service: See README.md here https://github.com/alexcpn/go_grpc_2022/tree/main/k8sdeployment/microservice_1
-- TS Client part (GRPC Web):https://github.com/alexcpn/go_grpc_2022/tree/main/microservice_1/ts_client + https://github.com/alexcpn/go_grpc_2022/blob/main/microservice_1/ts_client/src/index.ts
+- Kubernetes deployment,Envoy Side Car Configuration, Docker images: https://github.com/alexcpn/go_grpc_2022/tree/main/k8sdeployment/ 
+
+- Standalone TS Client part (GRPC Web): https://github.com/alexcpn/go_grpc_2022/tree/main/microservice_1/ts_client + https://github.com/alexcpn/go_grpc_2022/blob/main/microservice_1/ts_client/src/index.ts
 
 - - The README.md has details of how to generate the Typescript and JavaScript scripts as well as package them in WebPack so that they can be accessed from the HTML (main.js is generated from WebPack)
 https://github.com/alexcpn/go_grpc_2022/blob/main/microservice_1/ts_client/dist/index.html
@@ -62,17 +60,12 @@ First
 
 ## To Deploy in a Kubernetes Cluster
 
-Please see the [README.md](k8sdeployment/microservice_1/README.md) in k8sdeployment/microservice_1/README.md folder
+Please see the [k8sdeployment/microserice_1/README.md](k8sdeployment/README.md) 
 
 ### To Check how you can write a TypeScript GRPC client and use it directly from a Web Page
 
-See the [README.md](microservice_1/ts_client/README.md) in microservice_1/ts_client/README.md
+See the [microservice_1/ts_client/README.md](microservice_1/ts_client/README.md)
 
-## To build in Windows
-From Windows 10 onwards has docker support. You can install 'make' via Choclatey
-(https://stackoverflow.com/a/54086635/429476) and run. 
-The shell scripts for CURRENTDIR and PARENTDIR needs to be adopted to Windows Path format
-
--------------------------
+---
 
 
