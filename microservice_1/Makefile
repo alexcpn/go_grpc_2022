@@ -78,6 +78,8 @@ _build_go:
 # Not that this builds the Go project inside the container  itself. This could be a good pattern to build in CI
 docker_image:
 	docker build -t run_server:1.2 -f  Dockerfile $(PARENTDIR) 
+#Build the side car with the configuration as well
+	cd envoy && docker build -t envoy_run_server:1 .
 podman_image:
 	podman build -t run_server:1.2 -f  Dockerfile $(PARENTDIR) 
 
