@@ -67,11 +67,11 @@ _build_go:
 # Build a Docker conatiner for the MS 
 # Not that this builds the Go project inside the container  itself. This could be a good pattern to build in CI
 docker_image:
-	docker build -t app_onboarding:1.0 -f  Dockerfile $(PARENTDIR) 
+	docker build -t app_onboarding:1.1 -f  Dockerfile $(PARENTDIR) 
 #Build the side car with the configuration as well
 	cd envoy && docker build -t envoy_app_onboarding:1.0 .
 podman_image:
-	podman build -t app_onboarding:1.0 -f  Dockerfile $(PARENTDIR) 
+	podman build -t app_onboarding:1.1 -f  Dockerfile $(PARENTDIR) 
 
 #--------------------End-----------------------------
 
