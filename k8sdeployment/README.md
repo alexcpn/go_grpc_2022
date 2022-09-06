@@ -1,26 +1,13 @@
 # Deploy the Server in a Kubernetes cluster
 
 
-## Build the server docker image
+## Build the server docker image and enovy side-car image
 
 Make file [../microservice_1/Makefile](../microservice_1/Makefile)
 
 ```
 make docker_image
 ```
-
-## Build the Envoy docker image
-
-Envoy sidecar configuration - [k8sdeployment/microservice_1/envoy/envoy.yaml](./microservice_1/envoy/envoy.yaml)
-
-Makefile [k8sdeployment/Makefile](Makefile)
-
-```
-make enovy_docker
-```
-
-Note that I tagged the Docker images and pushed to my free Docker hub repo to use in this
-
 Prerequisite:
   A Kubernetes cluster. If none use `kind` and create a local cluster
 
@@ -29,7 +16,6 @@ Deploy the deployment file  [k8sdeployment/microservice_1/deployment.yaml](./mic
 `kubectl create -f deployment.yaml`
 
 This should run the pods and Expose the service
-
 
 ```
 kubectl get deployments -n grpc
