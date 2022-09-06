@@ -14,3 +14,4 @@ microservice_1/generated/go.mod
 microservice_1/generated/linter.out
 microservice_1/generated/test_client
 microservice_1/generated/test_server
+app_onboarding/generated/**

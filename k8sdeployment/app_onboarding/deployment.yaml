@@ -1,0 +1,60 @@
+# Create NS
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc
+# Create Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apponboarding
+  namespace: grpc
+  labels:
+    app: apponboarding
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apponboarding
+  template:
+    metadata:
+      labels:
+        app: apponboarding
+    spec:
+      containers:
+      - name: apponboarding
+        image: alexcpn/app_onboarding:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 50052
+          protocol: TCP
+        resources: {}
+        securityContext: {}
+      - name: envoy-sidecar
+        image: alexcpn/envoy_app_onboarding:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+        resources: {}
+        securityContext: {}
+
+---
+# Service Configuration
+# --------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: apponboarding
+  namespace: grpc
+  labels:
+    run: apponboarding
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+  selector:
+    app: apponboarding
+  type: NodePort
