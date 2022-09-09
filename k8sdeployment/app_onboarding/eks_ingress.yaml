@@ -1,0 +1,21 @@
+# also see https://stackoverflow.com/a/67237310/429476
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: grpc
+  name: apponboarding
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: apponboarding
+              port:
+                number: 8081
